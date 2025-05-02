@@ -32,3 +32,9 @@ jobs:
           SOME_SECRET: ${{ secrets.SOME_SECRET }} # use secrets if needed 
           WHTR_API_KEY: ${{ secrets.WHTR_API_KEY}}
         run: python main.py
+
+      - name: Upload status.log as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: status-log
+          path: status.log
