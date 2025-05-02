@@ -34,14 +34,18 @@ formatted = now.strftime("%Y-%m-%d %H:%M:%S")
 # Read secret
 try:
     SOME_SECRET = os.environ["SOME_SECRET"]
+    WHTR_API_KEY = os.environ["WHTR_API_KEY"]
 except KeyError:
     SOME_SECRET = "Token not available!"
     logger.warning("Token not available!")
 
+
+
 if __name__ == "__main__":
     logger.info(f"Token value: {SOME_SECRET}")
 
-    api_key = 'ec07f5b8954749b6861203448250105'  
+    # api_key = 'ec07f5b8954749b6861203448250105'  
+    api_key = WHTR_API_KEY
     city = 'Hyderabad'
     url = f'http://api.weatherapi.com/v1/current.json?key={api_key}&q={city}'
 
