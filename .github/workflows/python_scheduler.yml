@@ -29,5 +29,6 @@ jobs:
       # Step 4: Run the Python script (e.g., main.py)
       - name: Execute Python script (main.py)
         env:
-          SOME_SECRET: ${{ secrets.SOME_SECRET }} # use secrets if needed
+          SOME_SECRET: ${{ secrets.SOME_SECRET }} # use secrets if needed 
+          WHTR_API_KEY: ${{ secrets.WHTR_API_KEY}}
         run: python main.py
