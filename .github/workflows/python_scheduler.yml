@@ -18,7 +18,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.9' # specify the required Python version
+          python-version: '3.9'
 
       # Step 3: Install dependencies from requirements.txt
       - name: Install Python packages
@@ -26,13 +26,17 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # Step 4: Run the Python script (e.g., main.py)
-      - name: Execute Python script (main.py)
+      # Step 4: Run the Python script and log output to status.log
+      - name: Execute Python script (main.py) and log output
         env:
-          SOME_SECRET: ${{ secrets.SOME_SECRET }} # use secrets if needed 
-          WHTR_API_KEY: ${{ secrets.WHTR_API_KEY}}
-        run: python main.py
+          SOME_SECRET: ${{ secrets.SOME_SECRET }}
+          WHTR_API_KEY: ${{ secrets.WHTR_API_KEY }}
+        run: |
+          echo "Job started at $(date)" | tee -a status.log
+          python main.py 2>&1 | tee -a status.log
+          echo "Job ended at $(date)" | tee -a status.log
 
+      # Step 5: Upload the log as an artifact
       - name: Upload status.log as artifact
         uses: actions/upload-artifact@v4
         with:
